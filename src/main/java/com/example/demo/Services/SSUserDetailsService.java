@@ -35,7 +35,6 @@ public class SSUserDetailsService implements UserDetailsService {
                 return null;
             }
 
-            System.out.println(" User from username " + appUser.getUsername().toString());
 //            return new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), getAuthorities(appUser));
             return new CustomUserDetails(appUser, getAuthorities(appUser));
         }
@@ -54,7 +53,6 @@ public class SSUserDetailsService implements UserDetailsService {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
             authorities.add(grantedAuthority);
         }
-        System.out.println("User authorities are " + authorities.toString());
         return authorities;
     }
 }

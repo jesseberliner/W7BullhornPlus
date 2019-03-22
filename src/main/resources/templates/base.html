@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:fragment="header">
         <!-- Required meta tags -->
@@ -14,13 +14,52 @@
     <title>You shouldn't be here</title>
 </head>
 <body>
-<div th:fragment="nav">
+<th:block th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Bullhorn Plus</a>
+        <div sec:authorize="isAuthenticated()" class="nav-item nav-link text-dark" th:inline="text">
+            Welcome [[${#authentication.name}]]!
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <th:block sec:authorize="isAuthenticated()">
 
-</div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add">Add a moo</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </th:block>
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                </th:block>
+            </ul>
+            <span class="navbar-text">
+                Welcome to Cow!
+            </span>
+        </div>
+    </nav>
+</th:block>
 
 
 <div th:fragment="footer">
-
+    <footer class="bg-dark fixed-bottom">
+        <div class="container">
+            <a href="/" class="text-center m-0 text-white">Bullhorn Plus</a>
+        </div>
+    </footer>
 </div>
 <th:block th:fragment="javascript">
     <!-- Optional JavaScript -->

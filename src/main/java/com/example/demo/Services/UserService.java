@@ -4,6 +4,8 @@ import com.example.demo.Models.User;
 import com.example.demo.Repositories.RoleRepository;
 import com.example.demo.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -35,6 +37,13 @@ public class UserService {
     public User findByUsername(String username)
     {
         return userRepository.findByUsername(username);
+    }
+
+    public User getUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentusername = authentication.getName();
+        User user = userRepository.findByUsername(currentusername);
+        return user;
     }
 
     public void saveUser(User user) {

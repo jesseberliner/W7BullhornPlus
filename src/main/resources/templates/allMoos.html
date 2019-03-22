@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="base :: header"></div>
+    <title></title>
+</head>
+<body class="d-flex flex-column">
+<div th:replace="base :: nav"></div>
+<div class="container">
+    <!-- Page Heading -->
+    <h1 class="my-4">Moos
+        <h4>Click on the image to see the moo alone</h4>
+    </h1>
+    <!--moos-->
+    <th:block th:text="${#lists.size(moos)} ? '' : 'No moos yet'"></th:block>
+
+    <div class="row" th:each="moo : ${moos}">
+        <div class="col-md-7">
+            <a th:href="@{/detail/{id}(id=${moo.id})}">
+                <img class="img-fluid rounded mb-3 mb-md-0" th:src="${moo.image}" alt="No photo supplied">
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3 th:text="${moo.title}"></h3>
+            <p th:text="${moo.content}"></p>
+            <small th:text="'Posted by: ' + ${moo.postedBy}"></small>
+        </div>
+        <hr/>
+    </div>
+    <!-- /.row -->
+
+</div>
+
+<div th:replace="base :: footer"></div>
+<div th:replace="base :: javascript"></div>
+</body>
+
+</html>

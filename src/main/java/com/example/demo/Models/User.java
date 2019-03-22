@@ -36,6 +36,8 @@ public class User {
     @JoinTable(joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
     private Collection<Role> roles;
 
+
+
     public User() {
 
     }
@@ -119,4 +121,6 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
+
 }

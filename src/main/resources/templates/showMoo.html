@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="base :: header"></div>
+    <title></title>
+</head>
+<body class="d-flex flex-column">
+<div th:replace="base :: nav"></div>
+<div class="container">
+    <h1 class="my-4">Moo
+        <small></small>
+    </h1>
+    <!--moos-->
+    <div class="row" th:object="${moo}" >
+        <div class="col-md-7">
+            <img class="img-fluid rounded mb-3 mb-md-0" th:src="${moo.image}" alt="No photo supplied">
+        </div>
+        <div class="col-md-5">
+            <h3 th:text="${moo.title}"></h3>
+            <p th:text="${moo.content}"></p>
+            <small th:text="'Posted by: ' + ${moo.postedBy} +' on ' + ${moo.postedDate}"></small><br>
+            <span th:if="${user.username == moo.postedBy}">
+                <small> <a th:href="@{/update/{id}(id=${moo.id})}">Update</a> </small>
+            </span>
+            <!--<span th:if="${user.username != moo.postedBy}">-->
+                <!--<small> <a th:href="@{/follow/{id}(id=${moo.id})}">Follow</a> </small>-->
+            <!--</span>-->
+        </div>
+    </div>
+    <!-- /.row -->
+    <a href="/">Return to all Moos</a>
+</div>
+
+<div th:replace="base :: footer"></div>
+<div th:replace="base :: javascript"></div>
+</body>
+
+</html>
